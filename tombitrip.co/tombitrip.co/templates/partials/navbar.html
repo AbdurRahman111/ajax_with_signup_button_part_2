@@ -1,0 +1,524 @@
+  <!--Main Menu start-->
+  {% load static %}
+  <div class="menu-section-2">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-12">
+                <div class="main-logo">
+                    <a href="/"><img src="{% static 'img/logo1.png' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12">
+                <div class="menu nav-menu">
+                    <nav>
+                        <ul id="nav">
+                           
+                            {% if user.id is not None %}
+                            <li><a href="{% url 'supply' %}">Rent out your vehicle</a></li>
+                            <li><a href="{% url 'blog' %}">Blog</a></li>
+                               
+                                <li><a href="">Help <span class="caret"></span></a>
+                                    <ul class="submenu">
+                                        <li><a href="{% url 'traveller' %}">For travellers</a></li>
+                                        <li><a href="{% url 'ownercamper' %}">For owners</a></li>
+                                        <li><a href="{% url 'faq' %}">Other questions and contact</a></li>
+                                    </ul>
+                                </li>
+                                <li class="user-photo-tt"><a href="{% url 'user_profile' %}"><img class="user-menu-photo" src="{{  request.session.userimage }}" alt=""></a></li>
+                                <li class="user-name-tt"><a href="javascript:void;">{{user.username}} <span class="caret"></span></a>
+                                    <ul class="submenu">
+                                        <li><a href="{% url 'user_profile' %}">My dashboard</a></li>
+                                        <li><a href="{% url 'ownercamper' %}">For owners</a></li>
+                                        <li><a href="">Messages</a></li>
+                                        <li><a href="{% url 'my-advertise' %}">My Add</a></li>
+                                        <li><a href="{% url 'user_reservation' %}">My reservations</a></li>
+                                        
+                                        <li><a href="{% url 'favourite_list' %}">Favorites</a></li>
+                                        
+                                        <li><a href="{% url 'logout' %}">logout</a></li>
+                                    </ul>
+                                </li>
+                            {% else %}
+                            <li><a href="{% url 'supply' %}">Supply</a></li>
+                            <li><a href="{% url 'blog' %}">Blog</a></li>
+                            <li><a href="">Help <span class="caret"></span></a>
+                                <ul class="submenu">
+                                    <li><a href="{% url 'traveller' %}">For travellers</a></li>
+                                    <li><a href=" {% url 'ownercamper' %}">For owners</a></li>
+                                    <li><a href="{% url 'faq' %}">Other questions and contact</a></li>
+                                </ul>
+                            </li>
+                            <li data-toggle="modal" data-target="#exampleModalsignup" data-whatever="@fat"><a href="#">NewSign up</a></li>
+                            <li data-toggle="modal" data-target="#exampleModalsign" data-whatever="@mdo"><a href="#">NewLogin</a></li>
+                            <li><a href="{% url 'signup_form' %}">Sign up</a></li>
+                            <li><a href="{% url 'login_form' %}">Login</a></li>
+{#                            <li data-toggle="modal" data-target="#exampleModalsign" data-whatever="@mdo"><a href="{% url 'chat' %}">Chat</a></li>#}
+                            <li class="header-contact-item quote">
+                                <span class="quote-text"><a class="btn btn-primary quote-btn" href="{% url 'listvehicle' %}" role="button">List my vehicle</a></span>
+                            </li>
+                            
+                            
+                            
+                            <!--Login form-->
+                            <div class="modal fade" id="exampleModalsign" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog main-form login" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header login-head">
+                                            <h5 class="modal-title" id="exampleModalsign">Login</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            
+                                                <div id="myDIV">
+                                                  
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <!--<label for="username" class="text-information"></label>-->
+                                                    <input type="text" name="username" id="username1" class="form-control" placeholder="Username">
+                                                </div>
+                                                <div class="form-group">
+                                                    <!--<label for="password" class="text-information"></label>-->
+                                                    <input type="password" name="password" id="password1" class="form-control" placeholder="Password">
+                                                </div>
+                                                
+                                                <div id="examplea"></div>
+                                                
+                                                <div class="form-group mb_55">
+                                                    <label for="remember-me" class="text-information"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                                    <button onclick="myFunction()" class="btn btn-info btn-md log">Login</button>
+                                                </div>
+                                                <div id="register-link" class="text-right regi">
+                                                    <a data-toggle="modal" data-target="#exampleModalsignup" data-whatever="@fat" href="register.html" class="text-info text-color">Register here</a><br> 
+                                                    <a href="{% url "password_reset" %}">Forget Password?</a>
+                                                </div>
+                                                
+                                                
+                                                <!--submit of login details after checking-->
+                                                <form id="my_login_form" class="form" action="{% url 'login_form' %}" method="post">
+                                					{% csrf_token %}
+                                					<div class="form-group">
+                                						<input type="hidden" name="username" id="username2">
+                                					</div>
+                                					<div class="form-group">
+                                						<input type="hidden" name="password" id="password2">
+                                					</div>
+                                				</div> 
+                                				</form>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            
+                            <!--sign up form-->
+                            <div class="modal fade" id="exampleModalsignup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog main-form signup" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalsignup">Sign up</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="login-form" class="form" action="{% url 'signup_for_user' %}" method="POST">{% csrf_token %}
+                                                <div class="form-group">
+                                                    <!--<label for="username" class="text-information"></label>-->
+                                                    <input type="text" name="username" id="id_username" class="form-control" placeholder="User Name">
+                                                    <span id="show_info_username"></span>
+                                                    
+                                                </div>
+                                                <div class="form-group">
+                                                    <!--<label for="username" class="text-information"></label>-->
+                                                    <input type="email" name="email" id="id_email" class="form-control" placeholder="Email">
+                                                    <span id="show_info_email"></span>
+                                                    
+                                                    
+                                                    
+                                                </div>
+                                                <div class="form-group">
+                                                    <!--<label for="password" class="text-information"></label>-->
+                                                    <input type="password" name="password" id="id_password" class="form-control" placeholder="Password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <!--<label for="password" class="text-information"></label>-->
+                                                    <input type="password" name="re_password" id="id_re_password" class="form-control" placeholder="Retype Password">
+                                                    <span id="show_info_password"></span>
+                                                </div>
+                                                
+                                                <span id="test1212"></span>
+                                                <input type="hidden" id="email_available_status">
+                                                <input type="hidden" id="username_available_status">
+                                                <input type="hidden" id="pass_match_available_status">
+                                                
+                                                
+                                                
+                                                <div id="show_button" class="form-group">
+                                                    <input type="submit" name="submit" class="btn btn-secondary btn-md" value="Sign up" disabled>
+                                                </div>
+                                                
+                                                
+                        
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% endif %}
+                           
+                           
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+    
+    
+    
+    // signup
+        $(document).ready(function(){
+            // keyup event will be triggered when user leaves keyboard
+            $("#id_email").keyup(function(){
+                var email = $(this).val();
+                
+                var get_status_username = document.getElementById("username_available_status").value;
+                var get_status_pass = document.getElementById("pass_match_available_status").value;
+                
+
+                if(email!=""){
+                    $.ajax({
+                        url : '{% url 'check_email_exist' %}',
+                        type : 'POST',
+                        data : {email:email}
+                    })
+                    .done(function(response){
+                        // console.log(response);
+
+                        if(response == "True"){
+                            $(".email_error").remove();
+                            // $("<span class='email_error' style='color: red; padding: 5px; font-weight: bold;'> Email Not Available. </span>").insertAfter("#id_email")
+                            document.getElementById('show_info_email').innerHTML = "<span class='email_error' style='color: red; padding: 5px; font-weight: bold;'> Email Not Available. </span>"
+                            document.getElementById("email_available_status").value = '0';
+                            
+                            document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                            
+                            
+                        }
+                        else{
+                            $(".email_error").remove();
+                            // $("<span class='email_error' style='color: green; padding: 5px; font-weight: bold;'> Email Available. </span>").insertAfter("#id_email")
+                            document.getElementById('show_info_email').innerHTML = "<span class='email_error' style='color: green; padding: 5px; font-weight: bold;'> Email Available. </span>"
+                            document.getElementById("email_available_status").value = '1';
+                            
+                            
+                            if(get_status_username == "1" && get_status_pass == "1"){
+                                document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-info btn-md log" value="Sign up"> `;
+                            }
+                            else{
+                               document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                               
+                            }
+                            
+                        }
+                    })
+
+                    .fail(function(){
+                        console.log("Failed");
+                    })
+                }
+                else{
+                    $(".email_error").remove();
+                }
+                
+            })
+
+            $("#id_username").keyup(function(){
+                var username = $(this).val();
+                
+                var get_status_pass = document.getElementById("pass_match_available_status").value;
+                var get_status_email = document.getElementById("email_available_status").value;
+                
+                if(username!=""){
+                    $.ajax({
+                        url : '{% url 'check_username_exist' %}',
+                        type : 'POST',
+                        data : {username:username}
+                    })
+                    .done(function(response){
+                        //console.log(response);
+
+                        if(response == "True"){
+                            $(".username_error").remove();
+                            // $("<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Username Not Available. </span>").insertAfter("#id_username")
+                            document.getElementById('show_info_username').innerHTML ="<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Username Not Available. </span>"
+                            document.getElementById("username_available_status").value = '0';
+                            
+                            document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                        }
+                        else{
+                            $(".username_error").remove();
+                            // $("<span class='username_error' style='color: green; padding: 5px; font-weight: bold;'> Username Available. </span>").insertAfter("#id_username")
+                            document.getElementById('show_info_username').innerHTML ="<span class='username_error' style='color: green; padding: 5px; font-weight: bold;'> Username Available. </span>"
+                            document.getElementById("username_available_status").value = '1';
+                            
+                            if(get_status_email == "1" && get_status_pass == "1"){
+                                document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-info btn-md log" value="Sign up"> `;
+                            }
+                            else{
+                               document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                               
+                            }
+                        }
+                    })
+
+                    .fail(function(){
+                        console.log("Failed");
+                    })
+                }
+                else{
+                    $(".username_error").remove();
+                }
+                
+            })
+            
+            $("#id_password").keyup(function(){
+                var re_password_match = $(this).val();
+                
+                var id_password_value = document.getElementById("id_password").value;
+                var id_re_password_value = document.getElementById("id_re_password").value;
+                
+                var get_status_email = document.getElementById("email_available_status").value;
+                var get_status_username = document.getElementById("username_available_status").value;
+                
+                if(id_re_password_value==""){}
+                
+                else{
+                
+                        if(id_password_value == id_re_password_value){
+                            
+                            document.getElementById('show_info_password').innerHTML = `<span class='username_error' style='color: green; padding: 5px; font-weight: bold;'> Passwords are Matched </span>`;
+                            document.getElementById("pass_match_available_status").value = '1';
+                            
+                            if(get_status_email == "1" && get_status_username == "1"){
+                                document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-info btn-md log" value="Sign up"> `;
+                            }
+                            else{
+                               document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                               
+                            }
+                            
+                        }
+                        else{
+                               document.getElementById('show_info_password').innerHTML = `<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Passwoeds are Not Matched </span>`;
+                               document.getElementById("pass_match_available_status").value = '0';
+                               document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                            }
+                    }
+                
+            })
+            
+            
+            
+            $("#id_re_password").keyup(function(){
+                var re_password_match = $(this).val();
+                
+                var id_password_value = document.getElementById("id_password").value;
+                var id_re_password_value = document.getElementById("id_re_password").value;
+                
+                // get email status
+                var get_status_email = document.getElementById("email_available_status").value;
+                var get_status_username = document.getElementById("username_available_status").value;
+                
+                
+                if(id_password_value==""){}
+                
+                else{
+                
+                        if(id_password_value == id_re_password_value){
+                            
+                            document.getElementById('show_info_password').innerHTML = 
+                                                `<span class='username_error' style='color: green; padding: 5px; font-weight: bold;'> Passwords are Matched </span>`;
+                            
+                            document.getElementById("pass_match_available_status").value = '1';
+                            
+                            if(get_status_email == "1" && get_status_username == "1"){
+                                document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-info btn-md log" value="Sign up"> `;
+                            }
+                            else{
+                               document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                               
+                            }
+                                                
+                            
+                        }
+                        else{
+                               document.getElementById('show_info_password').innerHTML = `<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'>Passwoeds are Not Matched </span>`;
+                               document.getElementById("pass_match_available_status").value = '0';
+                               document.getElementById('show_button').innerHTML = 
+                                                `<input type="submit" name="submit" class="btn btn-secondary" value="Sign up" disabled> `;
+                               
+                            }
+                    }
+                    
+                // this is for making button dynamic
+                
+                
+                // document.getElementById('test1212').innerHTML = `<span class='username_error' style='color: green; padding: 5px; font-weight: bold;'> ${get_status_email} </span>`;
+                
+                
+            })
+        
+            
+        })
+        
+        
+        
+        
+        // login
+        function myFunction() {
+            var username1_value = document.getElementById("username1").value;
+            var password1_value = document.getElementById("password1").value;
+            
+            if(username1_value == ""){
+                document.getElementById('myDIV').innerHTML = `<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Username Required </span>`
+            }
+            
+            else if(password1_value == ""){
+                document.getElementById('myDIV').innerHTML = `<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Password Required </span>`
+            }
+            
+            else{
+                $.ajax({
+                        url : '{% url 'check_login_user' %}',
+                        type : 'POST',
+                        data : {username1_value:username1_value, password1_value:password1_value}
+                    })
+                    .done(function(response){
+                        //console.log(response);
+
+                        if(response == "True"){
+                            document.getElementById('myDIV').innerHTML = `<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Successfully Loged in !! </span>`
+                            
+                            // $('#username2').val(JSON.stringify(username1_value))
+                            // $('#password2').val(JSON.stringify(password1_value))
+                            // document.getElementById('username2').innerHTML = username1_value
+                            // document.getElementById('password2').innerHTML = password1_value
+                            
+                            document.getElementById("username2").value = username1_value;
+                            document.getElementById("password2").value = password1_value;
+                            
+                            var form = document.getElementById("my_login_form");
+                            form.submit();
+                        }
+                        else{
+                            document.getElementById('myDIV').innerHTML = `<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Invalid credentials </span>`
+                        }
+                    })
+
+                    .fail(function(){
+                        console.log("Failed");
+                    })
+            }
+            
+        }
+        
+        
+        
+        
+        
+        
+        // $(document).ready(function(){
+        //     // keyup event will be triggered when user leaves keyboard
+        //     $("#username1").keyup(function(){
+        //         var email = $(this).val();
+
+        //         if(email!=""){
+        //             $.ajax({
+        //                 url : '{% url 'check_email_exist' %}',
+        //                 type : 'POST',
+        //                 data : {email:email}
+        //             })
+        //             .done(function(response){
+        //                 // console.log(response);
+
+        //                 if(response == "True"){
+        //                     $(".email_error").remove();
+        //                     $("<span class='email_error' style='color: green; padding: 5px; font-weight: bold;'> Email Exist. </span>").insertAfter("#username1")
+        //                 }
+        //                 else{
+        //                     $(".email_error").remove();
+        //                     $("<span class='email_error' style='color: red; padding: 5px; font-weight: bold;'> Email Not Exist. </span>").insertAfter("#username1")
+        //                 }
+        //             })
+
+        //             .fail(function(){
+        //                 console.log("Failed");
+        //             })
+        //         }
+        //         else{
+        //             $(".email_error").remove();
+        //         }
+                
+        //     })
+
+        //     $("#username1").keyup(function(){
+        //         var username = $(this).val();
+                
+        //         if(username!=""){
+                    // $.ajax({
+                    //     url : '{% url 'check_username_exist' %}',
+                    //     type : 'POST',
+                    //     data : {username:username}
+                    // })
+                    // .done(function(response){
+                    //     //console.log(response);
+
+                    //     if(response == "True"){
+                    //         $(".username_error").remove();
+                    //         $("<span class='username_error' style='color: green; padding: 5px; font-weight: bold;'> Username Exist. </span>").insertAfter("#username1")
+                    //     }
+                    //     else{
+                    //         $(".username_error").remove();
+                    //         $("<span class='username_error' style='color: red; padding: 5px; font-weight: bold;'> Username Not Exist. </span>").insertAfter("#username1")
+                    //     }
+                    // })
+
+                    // .fail(function(){
+                    //     console.log("Failed");
+                    // })
+        //         }
+        //         else{
+        //             $(".username_error").remove();
+        //         }
+                
+        //     })
+            
+        // })
+        
+        
+        
+    </script>
+
+<!--Main menu end-->
